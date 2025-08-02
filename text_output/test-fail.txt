@@ -1,0 +1,19 @@
+{
+  "scenes": [
+    {
+      "scene_id": "start",
+      "text": "Начало игры",
+      "choices": [
+        {
+          "text": "Идти налево",
+          "next_scene": "left"
+        }
+      ]
+    },
+    {
+      "scene_id": "left", 
+      "text": "Вы пошли налево",
+      "choices": []
+    }
+  ]
+}
