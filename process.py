@@ -68,7 +68,14 @@ class GameValidator:
                 if isinstance(choice, dict) and 'next_scene' in choice:
                     self.graph[scene_id].append(choice['next_scene'])
                     
-        # Этап 3: Проверка наличия развилки (хотя бы одна сцена с 2+ выборами)
+        # Этап 3: Проверка корректности ссылок (все next_scene должны существовать)
+        invalid_refs = self._check_scene_references()
+        if invalid_refs:
+            invalid_list = ', '.join([f"'{ref}'" for ref in invalid_refs[:5]])  # Показываем первые 5
+            more_text = f" и еще {len(invalid_refs) - 5}" if len(invalid_refs) > 5 else ""
+            return False, f"Найдены ссылки на несуществующие сцены: {invalid_list}{more_text}", None
+            
+        # Этап 4: Проверка наличия развилки (хотя бы одна сцена с 2+ выборами)
         has_branch = False
         for scene_id, scene in self.scenes.items():
             choices = scene.get('choices', [])
@@ -79,11 +86,30 @@ class GameValidator:
         if not has_branch:
             return False, "Не найдено ни одной развилки (сцены с 2+ выборами)", None
             
-        # Этап 4: Проверка глубины веток (минимум одна ветка глубиной 3+ сцены)
+        # Этап 5: Проверка глубины веток (минимум одна ветка глубиной 3+ сцены)
         if not self._check_branch_depth():
             return False, "Нет ветки глубиной минимум 3 сцены", None
             
         return True, "Все проверки пройдены успешно", data
+        
+    def _check_scene_references(self) -> List[str]:
+        """
+        Проверяет, что все next_scene в choices ссылаются на существующие сцены.
+        
+        Returns:
+            List[str]: Список несуществующих scene_id
+        """
+        invalid_refs = set()
+        
+        for scene_id, scene in self.scenes.items():
+            choices = scene.get('choices', [])
+            for choice in choices:
+                if isinstance(choice, dict) and 'next_scene' in choice:
+                    next_scene = choice['next_scene']
+                    if next_scene not in self.scenes:
+                        invalid_refs.add(next_scene)
+                        
+        return list(invalid_refs)
         
     def _check_branch_depth(self) -> bool:
         """
