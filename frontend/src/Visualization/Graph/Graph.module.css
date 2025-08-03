@@ -5,10 +5,10 @@
   position: relative;
   background-image: 
     /* Основная сетка 10x10 */
-    linear-gradient(rgba(214, 189, 152, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(214, 189, 152, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(var(--text-color), 0.1), 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--text-color), 0.1), 1px, transparent 1px),
     /* Точки на пересечениях сетки 40x40 */
-    radial-gradient(circle at center, rgba(214, 189, 152, 0.4) 1px, transparent 1px);
+    radial-gradient(circle at center, rgba(var(--text-color), 0.4), 1px, transparent 1px);
   background-size: 
     20px 20px,
     20px 20px,
@@ -44,7 +44,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #D6BD98;
+  color: var(--text-color);
   font-size: '18px';
   font-weight: bold;
 }
@@ -54,7 +54,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ff6b6b;
+  color: var(--text-color);
   font-size: 18px;
   text-align: center;
   font-weight: bold;

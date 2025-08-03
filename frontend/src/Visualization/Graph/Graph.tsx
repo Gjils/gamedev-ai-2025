@@ -12,7 +12,7 @@ import styles from './Graph.module.css';
 // API URL для backend
 const API_BASE_URL = 'http://localhost:8000';
 
-const NODE_SIZE = { width: 150, height: 70 };
+const NODE_SIZE = { width: 150, height: 60 };
 
 // Функция для вычисления начального transform для центрирования графа
 function calculateCenterTransform(nodes: GraphNodeInterface[], containerSize: { width: number; height: number }) {
@@ -234,34 +234,6 @@ function Graph() {
       
       {!questData.loading && !questData.error && (
         <>
-          {/* Кнопка центрирования */}
-          <button
-            onClick={centerGraph}
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              'z-index': '100',
-              padding: '10px 16px',
-              'background-color': '#677D6A',
-              color: '#D6BD98',
-              border: '1px solid #D6BD98',
-              'border-radius': '6px',
-              cursor: 'pointer',
-              'font-size': '14px',
-              'font-weight': 'bold',
-              transition: 'background-color 0.2s ease'
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = '#7A8A7D';
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = '#677D6A';
-            }}
-          >
-            📍 Центр
-          </button>
-
           <div
             style={{
               transform: `translate(${transform().x}px, ${transform().y}px) scale(${transform().scale})`,

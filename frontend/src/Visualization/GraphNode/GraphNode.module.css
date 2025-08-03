@@ -1,19 +1,21 @@
 .GraphNode {
     width: 150px;
-    height: 70px;
-    border-radius: 10px;
+    height: 60px;
+    border-radius: 15px;
     padding: 10px;
-    background-color: #677D6A;
+    background-color: var(--primary-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: absolute;
-    color: #D6BD98;
-    font-size: 7pt;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    font-size: 8pt;
     display: flex;
     font-weight: bold;
     align-items: center;
     justify-content: center;
     transition: box-shadow 0.2s ease, transform 0.1s ease;
     user-select: none;
+    box-sizing: border-box;
 }
 
 .GraphNode:hover {

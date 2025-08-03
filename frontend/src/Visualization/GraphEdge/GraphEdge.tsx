@@ -51,15 +51,15 @@ function GraphEdge(props: GraphEdgeProps) {
         y1={y1()}
         x2={x2()}
         y2={y2()}
-        stroke="#D6BD98"
+        stroke="var(--text-color)"
         stroke-width={2}
       />
       
       {/* Arrow head - filled triangle */}
       <path
         d={`M ${arrowTipX()},${arrowTipY()} L ${arrowX1()},${arrowY1()} L ${arrowX2()},${arrowY2()} Z`}
-        fill="#D6BD98"
-        stroke="#D6BD98"
+        fill="var(--text-color)"
+        stroke="var(--text-color)"
         stroke-width={1}
         stroke-linejoin="round"
         stroke-linecap="round"
@@ -69,9 +69,9 @@ function GraphEdge(props: GraphEdgeProps) {
       <circle
         cx={x1()}
         cy={y1()}
-        r={4}
-        fill="#D6BD98"
-        stroke="#1A3636"
+        r={5}
+        fill="var(--text-color)"
+        stroke="var(--bg-color)"
         stroke-width={1}
       />
       

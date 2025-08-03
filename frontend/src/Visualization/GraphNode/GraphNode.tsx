@@ -42,8 +42,8 @@ function GraphNode(props : GraphNodeProps) {
     // Преобразуем экранные координаты в координаты графа
     // Учитываем трансформацию контейнера (смещение и масштаб)
     // Также учитываем размер узла, чтобы центр узла был под курсором
-    const nodeWidth = 130; // из CSS
-    const nodeHeight = 40; // из CSS
+    const nodeWidth = 150; // из CSS
+    const nodeHeight = 60; // из CSS
 
     const newX = (e.clientX - transform().x) / transform().scale - nodeWidth / 2;
     const newY = (e.clientY - transform().y) / transform().scale - nodeHeight / 2;

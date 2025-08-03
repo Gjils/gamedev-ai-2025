@@ -1,0 +1,88 @@
+.GenerationContainer {
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.FormField {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.FormLabel {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+}
+
+.FormInput {
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid var(--text-color);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+    display: block;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.FormInput:focus {
+    border-color: var(--text-color);
+    background-color: var(--secondary-color);
+}
+
+.FormTextarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid var(--text-color);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.FormTextarea:focus {
+    border-color: var(--text-color);
+    background-color: var(--secondary-color);
+}
+
+.FormButton {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.FormButton:disabled {
+    background-color: var(--secondary-color);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.FormButton:hover:not(:disabled) {
+    background-color: var(--text-color);
+}
