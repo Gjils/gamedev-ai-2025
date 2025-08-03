@@ -1,6 +1,6 @@
+import { useParams } from "@solidjs/router";
 import { createEffect, createMemo, createResource, createSignal, For, onMount } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
-import { useParams } from "@solidjs/router";
 
 import GraphEdge, { GraphEdgeProps } from "../GraphEdge/GraphEdge";
 import GraphNode from "../GraphNode/GraphNode";
@@ -143,7 +143,7 @@ function Graph() {
     <div
       ref={(el) => { containerRef = el; }}
       class={styles.GraphContainer}
-    >
+    > 
       {questData.loading && (
         <div class={styles.Loading}>
           Загрузка квеста {questName}...
