@@ -1,12 +1,11 @@
 import type { Component } from 'solid-js';
+import { Route, Router } from '@solidjs/router';
 
 import Graph from '../Visualization/Graph/Graph';
-
-import { Route, Router } from '@solidjs/router';
-import styles from './App.module.css';
 import QuestList from '../QuestList/QusetList';
+import Generation from '../Generation/Generation';
 
-const quest_name = 'example-1';
+import styles from './App.module.css';
 
 const App: Component = () => {
   return (
@@ -14,8 +13,8 @@ const App: Component = () => {
       <Router>
         <Route path={"/:questName"} component={Graph} />
         <Route path={"/"} component={QuestList} />
+        <Route path={"/generate"} component={Generation} />  
       </Router>
-      
     </div>
   );
 };
