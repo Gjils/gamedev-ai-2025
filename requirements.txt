@@ -144,3 +144,6 @@ urllib3==2.5.0
 wcwidth==0.2.13
 websocket-client==1.8.0
 wsproto==1.2.0
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6

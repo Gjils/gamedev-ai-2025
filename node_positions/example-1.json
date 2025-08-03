@@ -1,0 +1,121 @@
+[
+  {
+    "scene_id": "start",
+    "position": {
+      "x": 27,
+      "y": 178
+    }
+  },
+  {
+    "scene_id": "main_gate",
+    "position": {
+      "x": 141,
+      "y": 203
+    }
+  },
+  {
+    "scene_id": "hidden_path",
+    "position": {
+      "x": 289,
+      "y": 151
+    }
+  },
+  {
+    "scene_id": "fight_guards",
+    "position": {
+      "x": 289,
+      "y": 205
+    }
+  },
+  {
+    "scene_id": "sleep_guards",
+    "position": {
+      "x": 485,
+      "y": 278
+    }
+  },
+  {
+    "scene_id": "underground_corridor",
+    "position": {
+      "x": 485,
+      "y": 132
+    }
+  },
+  {
+    "scene_id": "enhanced_staff",
+    "position": {
+      "x": 858,
+      "y": 97
+    }
+  },
+  {
+    "scene_id": "repair_room",
+    "position": {
+      "x": 485,
+      "y": 224
+    }
+  },
+  {
+    "scene_id": "throne_room",
+    "position": {
+      "x": 685,
+      "y": 178
+    }
+  },
+  {
+    "scene_id": "final_battle_win",
+    "position": {
+      "x": 858,
+      "y": 189
+    }
+  },
+  {
+    "scene_id": "final_battle_talk",
+    "position": {
+      "x": 1041,
+      "y": 241
+    }
+  },
+  {
+    "scene_id": "dark_corridor",
+    "position": {
+      "x": 1216,
+      "y": 245
+    }
+  },
+  {
+    "scene_id": "ally_help",
+    "position": {
+      "x": 1364,
+      "y": 126
+    }
+  },
+  {
+    "scene_id": "steal_scrolls",
+    "position": {
+      "x": 1503,
+      "y": 126
+    }
+  },
+  {
+    "scene_id": "spirit_battle",
+    "position": {
+      "x": 1041,
+      "y": 95
+    }
+  },
+  {
+    "scene_id": "side_passage",
+    "position": {
+      "x": 1041,
+      "y": 149
+    }
+  },
+  {
+    "scene_id": "gather_info",
+    "position": {
+      "x": 1216,
+      "y": 191
+    }
+  }
+]

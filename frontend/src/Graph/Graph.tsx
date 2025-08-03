@@ -1,27 +1,75 @@
-import { createMemo, createSignal, For, onMount } from "solid-js";
+import { createEffect, createMemo, createResource, createSignal, For, onMount } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
+import { useParams } from "@solidjs/router";
 
 import GraphEdge, { GraphEdgeProps } from "../GraphEdge/GraphEdge";
 import GraphNode from "../GraphNode/GraphNode";
 
+import GraphNodeInterface from "../GraphNode/GraphNodeInterface";
 import styles from './Graph.module.css';
 
-import mockNodesData from '../../../json_output/example-2.json' with { type: 'json' };
-import mockNodesPostitions from '../../../node_positions/example-2.json' with { type: 'json' };
-import GraphNodeInterface from "../GraphNode/GraphNodeInterface";
-const mockNodes = mockNodesData.scenes.map(item => ({...item, position: (mockNodesPostitions.find(pos => pos.scene_id === item.scene_id) ?? { position: { x: 0, y: 0 } }).position}));
+// API URL для backend
+const API_BASE_URL = 'http://localhost:8000';
+
+interface QuestResponse {
+  quest_name: string;
+  quest_data: {
+    scenes: any[];
+  };
+  node_positions: Array<{
+    scene_id: string;
+    position: { x: number; y: number };
+  }>;
+}
+
+// Функция для загрузки данных квеста
+async function fetchQuestData(questName: string): Promise<GraphNodeInterface[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/get_quest_data/${questName}`);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data: QuestResponse = await response.json();
+    
+    // Объединяем данные сцен с позициями
+    const nodes = data.quest_data.scenes.map(scene => ({
+      ...scene,
+      position: data.node_positions.find(pos => pos.scene_id === scene.scene_id)?.position ?? { x: 0, y: 0 }
+    }));
+    
+    return nodes;
+  } catch (error) {
+    console.error('Ошибка при загрузке данных квеста:', error);
+    throw error;
+  }
+}
 
 function Graph() {
+  const { questName } = useParams();
   let containerRef: HTMLDivElement | null = null;
   const [transform, setTransform] = createSignal({ x: 0, y: 0, scale: 1 });
 
-  const [nodes, setNodes] = createStore(mockNodes);
+  // Используем createResource для загрузки данных
+  const [questData] = createResource(() => questName, fetchQuestData);
+  
+  // Создаём store только когда данные загружены
+  const [nodes, setNodes] = createStore<GraphNodeInterface[]>([]);
+
+  // Обновляем nodes когда данные загружены
+  createEffect(() => {
+    const data = questData();
+    if (data) {
+      setNodes(data);
+    }
+  });
 
   const edges = createMemo(() => {
     const edges: GraphEdgeProps[] = [];
     for (let i = 0; i < nodes.length; i++) {
       for (let j = 0; j < nodes.length; j++) {
-        if (nodes[i].choices.map(choice => choice.next_scene).includes(nodes[j].scene_id)) {
+        if (nodes[i].choices?.map((choice: any) => choice.next_scene).includes(nodes[j].scene_id)) {
           edges.push({ source: nodes[i].position, target: nodes[j].position });
         }
       }
@@ -96,35 +144,49 @@ function Graph() {
       ref={(el) => { containerRef = el; }}
       class={styles.GraphContainer}
     >
-      <div
-        style={{
-          transform: `translate(${transform().x}px, ${transform().y}px) scale(${transform().scale})`,
-        }}
-        class={styles.Graph}
-      >
-        
-        {/* Узлы графа */}
-        <For each={nodes}>
-          {(node, index) => (
-            <GraphNode 
-              node={node} 
-              setNode={setNodes.bind(null, index()) as SetStoreFunction<GraphNodeInterface>} 
-              scale={() => transform().scale}
-              transform={transform()}
-            />
-          )}
-        </For>
-        {/* Связь */}
-        <svg 
-          class={styles.EdgesContainer}
+      {questData.loading && (
+        <div class={styles.Loading}>
+          Загрузка квеста {questName}...
+        </div>
+      )}
+      
+      {questData.error && (
+        <div class={styles.Error}>
+          Ошибка загрузки квеста: {questData.error.message}
+        </div>
+      )}
+      
+      {!questData.loading && !questData.error && (
+        <div
+          style={{
+            transform: `translate(${transform().x}px, ${transform().y}px) scale(${transform().scale})`,
+          }}
+          class={styles.Graph}
         >
-          <For each={edges()}>
-            {(edge) => (
-              <GraphEdge {...edge} />
+          
+          {/* Узлы графа */}
+          <For each={nodes}>
+            {(node, index) => (
+              <GraphNode 
+                node={node} 
+                setNode={setNodes.bind(null, index()) as SetStoreFunction<GraphNodeInterface>} 
+                scale={() => transform().scale}
+                transform={transform()}
+              />
             )}
           </For>
-        </svg>
-      </div>
+          {/* Связь */}
+          <svg 
+            class={styles.EdgesContainer}
+          >
+            <For each={edges()}>
+              {(edge) => (
+                <GraphEdge {...edge} />
+              )}
+            </For>
+          </svg>
+        </div>
+      )}
     </div>
   );
 }
