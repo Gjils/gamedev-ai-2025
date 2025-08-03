@@ -115,7 +115,9 @@ function Graph() {
           )}
         </For>
         {/* Связь */}
-        <svg class={styles.EdgesContainer}>
+        <svg 
+          class={styles.EdgesContainer}
+        >
           <For each={edges()}>
             {(edge) => (
               <GraphEdge {...edge} />
