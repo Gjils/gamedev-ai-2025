@@ -6,6 +6,7 @@ interface NodeInfoProps {
   isVisible: boolean;
   onClose: () => void;
   position?: { x: number; y: number };
+  setCurrentNode: (scene_id: string) => void;
 }
 
 function NodeInfo(props: NodeInfoProps) {
@@ -166,7 +167,11 @@ function NodeInfo(props: NodeInfoProps) {
                     }}
                     onMouseLeave={(e) => {
                       (e.target as HTMLElement).style.borderColor = '#677D6A';
-                    }}>
+                    }}
+                    onClick={() => {
+                      props.setCurrentNode(choice.next_scene);
+                    }}
+                    >
                       <div style={{
                         display: 'flex',
                         'justify-content': 'space-between',

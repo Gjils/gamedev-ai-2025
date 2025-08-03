@@ -15,7 +15,7 @@ function GraphNode(props : GraphNodeProps) {
   const position = () => props.node.position;
   const transform = () => props.transform;
   const { scene_id } = props.node;
-  const { scale, setNode } = props;
+  const { setNode } = props;
 
   const [isDragging, setIsDragging] = createSignal(false);
   const [dragStartPos, setDragStartPos] = createSignal({ x: 0, y: 0 });

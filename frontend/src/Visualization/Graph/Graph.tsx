@@ -6,11 +6,57 @@ import GraphEdge, { GraphEdgeProps } from "../GraphEdge/GraphEdge";
 import GraphNode from "../GraphNode/GraphNode";
 
 import GraphNodeInterface from "../GraphNode/GraphNodeInterface";
-import styles from './Graph.module.css';
 import NodeInfo from "../NodeInfo/NodeInfo";
+import styles from './Graph.module.css';
 
 // API URL для backend
 const API_BASE_URL = 'http://localhost:8000';
+
+const NODE_SIZE = { width: 150, height: 70 };
+
+// Функция для вычисления начального transform для центрирования графа
+function calculateCenterTransform(nodes: GraphNodeInterface[], containerSize: { width: number; height: number }) {
+  if (!nodes.length) return { x: 0, y: 0, scale: 1 };
+
+  // Находим границы графа
+  const positions = nodes.map(node => node.position);
+  const minX = Math.min(...positions.map(p => p.x));
+  const maxX = Math.max(...positions.map(p => p.x));
+  const minY = Math.min(...positions.map(p => p.y));
+  const maxY = Math.max(...positions.map(p => p.y));
+
+  // Добавляем размеры узлов к границам
+  const graphWidth = (maxX - minX) + NODE_SIZE.width;
+  const graphHeight = (maxY - minY) + NODE_SIZE.height;
+
+  // Размеры контейнера с отступами
+  const MARGIN = 50;
+  const availableWidth = containerSize.width - 2 * MARGIN;
+  const availableHeight = containerSize.height - 2 * MARGIN;
+
+  // Вычисляем масштаб для помещения графа в доступную область
+  const scaleX = availableWidth / graphWidth;
+  const scaleY = availableHeight / graphHeight;
+  const scale = Math.min(scaleX, scaleY, 1); // Не увеличиваем больше 100%
+
+  // Вычисляем центр графа
+  const graphCenterX = minX + (maxX - minX) / 2;
+  const graphCenterY = minY + (maxY - minY) / 2;
+
+  // Вычисляем центр контейнера
+  const containerCenterX = containerSize.width / 2;
+  const containerCenterY = containerSize.height / 2;
+
+  // Вычисляем смещение для центрирования
+  const offsetX = containerCenterX - (graphCenterX * scale);
+  const offsetY = containerCenterY - (graphCenterY * scale);
+
+  return {
+    x: offsetX,
+    y: offsetY,
+    scale: scale
+  };
+}
 
 interface QuestResponse {
   quest_name: string;
@@ -66,11 +112,32 @@ function Graph() {
     setSelectedNode(node);
   };
 
+  // Функция для центрирования графа по кнопке
+  const centerGraph = () => {
+    if (containerRef && nodes.length > 0) {
+      const containerRect = containerRef.getBoundingClientRect();
+      const centerTransform = calculateCenterTransform(nodes, {
+        width: containerRect.width,
+        height: containerRect.height
+      });
+      setTransform(centerTransform);
+    }
+  };
+
   // Обновляем nodes когда данные загружены
   createEffect(() => {
     const data = questData();
-    if (data) {
+    if (data && containerRef) {
       setNodes(data);
+      
+      // Автоматически центрируем граф после загрузки данных
+      const containerRect = containerRef.getBoundingClientRect();
+      const centerTransform = calculateCenterTransform(data, {
+        width: containerRect.width,
+        height: containerRect.height
+      });
+      
+      setTransform(centerTransform);
     }
   });
 
@@ -79,7 +146,7 @@ function Graph() {
     for (let i = 0; i < nodes.length; i++) {
       for (let j = 0; j < nodes.length; j++) {
         if (nodes[i].choices?.map((choice: any) => choice.next_scene).includes(nodes[j].scene_id)) {
-          edges.push({ source: nodes[i].position, target: nodes[j].position });
+          edges.push({ source: nodes[i].position, target: nodes[j].position, node_size: NODE_SIZE });
         }
       }
     }
@@ -166,12 +233,41 @@ function Graph() {
       )}
       
       {!questData.loading && !questData.error && (
-        <div
-          style={{
-            transform: `translate(${transform().x}px, ${transform().y}px) scale(${transform().scale})`,
-          }}
-          class={styles.Graph}
-        >
+        <>
+          {/* Кнопка центрирования */}
+          <button
+            onClick={centerGraph}
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              'z-index': '100',
+              padding: '10px 16px',
+              'background-color': '#677D6A',
+              color: '#D6BD98',
+              border: '1px solid #D6BD98',
+              'border-radius': '6px',
+              cursor: 'pointer',
+              'font-size': '14px',
+              'font-weight': 'bold',
+              transition: 'background-color 0.2s ease'
+            }}
+            onMouseEnter={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = '#7A8A7D';
+            }}
+            onMouseLeave={(e) => {
+              (e.target as HTMLButtonElement).style.backgroundColor = '#677D6A';
+            }}
+          >
+            📍 Центр
+          </button>
+
+          <div
+            style={{
+              transform: `translate(${transform().x}px, ${transform().y}px) scale(${transform().scale})`,
+            }}
+            class={styles.Graph}
+          >
           
           {/* Узлы графа */}
           <For each={nodes}>
@@ -196,6 +292,7 @@ function Graph() {
             </For>
           </svg>
         </div>
+        </>
       )}
       
       {/* Отображение информации о выбранной сцене */}
@@ -203,6 +300,7 @@ function Graph() {
         node={selectedNode()}
         isVisible={!!selectedNode()}
         onClose={() => setSelectedNode(null)}
+        setCurrentNode={(scene_id) => setSelectedNode(nodes.find(node => node.scene_id === scene_id) || null)}
       />
     </div>
   );
