@@ -1,0 +1,27 @@
+.GraphNode {
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #677D6A;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    color: #D6BD98;
+    font-size: 7pt;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow 0.2s ease, transform 0.1s ease;
+    user-select: none;
+}
+
+.GraphNode:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.GraphNode.dragging {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
