@@ -7,6 +7,7 @@ import GraphNode from "../GraphNode/GraphNode";
 
 import GraphNodeInterface from "../GraphNode/GraphNodeInterface";
 import styles from './Graph.module.css';
+import NodeInfo from "../NodeInfo/NodeInfo";
 
 // API URL для backend
 const API_BASE_URL = 'http://localhost:8000';
@@ -56,6 +57,14 @@ function Graph() {
   
   // Создаём store только когда данные загружены
   const [nodes, setNodes] = createStore<GraphNodeInterface[]>([]);
+  
+  // Состояние для выбранного узла
+  const [selectedNode, setSelectedNode] = createSignal<GraphNodeInterface | null>(null);
+
+  // Обработчик клика по узлу
+  const handleNodeClick = (node: GraphNodeInterface) => {
+    setSelectedNode(node);
+  };
 
   // Обновляем nodes когда данные загружены
   createEffect(() => {
@@ -172,6 +181,7 @@ function Graph() {
                 setNode={setNodes.bind(null, index()) as SetStoreFunction<GraphNodeInterface>} 
                 scale={() => transform().scale}
                 transform={transform()}
+                onClick={() => handleNodeClick(node)}
               />
             )}
           </For>
@@ -187,6 +197,13 @@ function Graph() {
           </svg>
         </div>
       )}
+      
+      {/* Отображение информации о выбранной сцене */}
+      <NodeInfo
+        node={selectedNode()}
+        isVisible={!!selectedNode()}
+        onClose={() => setSelectedNode(null)}
+      />
     </div>
   );
 }
