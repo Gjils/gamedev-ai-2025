@@ -124,6 +124,83 @@ function Graph() {
     }
   };
 
+  // Функция для скачивания JSON без позиций
+  const downloadQuestData = () => {
+    if (!questData() || !nodes.length) return;
+
+    // Создаем копию данных без позиций
+    const questDataForDownload = {
+      scenes: nodes.map(node => {
+        const { position, ...nodeWithoutPosition } = node;
+        return nodeWithoutPosition;
+      })
+    };
+
+    // Создаем blob с JSON данными
+    const jsonString = JSON.stringify(questDataForDownload, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    
+    // Создаем ссылку для скачивания
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${questName}.json`;
+    
+    // Запускаем скачивание
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Освобождаем память
+    URL.revokeObjectURL(url);
+  };
+
+  // Функция для сохранения изменений на сервер
+  const saveQuestData = async () => {
+    if (!questData() || !nodes.length || !questName) return;
+
+    try {
+      // Подготавливаем данные для отправки
+      const questDataToSave = {
+        scenes: nodes.map(node => {
+          const { position, ...nodeWithoutPosition } = node;
+          return nodeWithoutPosition;
+        })
+      };
+
+      const nodePositions = nodes.map(node => ({
+        scene_id: node.scene_id,
+        position: node.position
+      }));
+
+      // Отправляем запрос на сервер
+      const response = await fetch(`${API_BASE_URL}/update_quest`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quest_name: questName,
+          quest_data: questDataToSave,
+          node_positions: nodePositions
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
+        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Квест успешно сохранён:', result);
+      // alert('Изменения успешно сохранены!');
+      
+    } catch (error) {
+      console.error('Ошибка при сохранении:', error);
+      alert(`Произошла ошибка при сохранении: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  };
+
   // Обновляем nodes когда данные загружены
   createEffect(() => {
     const data = questData();
@@ -222,6 +299,24 @@ function Graph() {
         <div class={styles.HeadingContainer}>
           <h1 class={styles.Heading}>{questName}</h1>
         </div>
+        <div class={styles.ActionButtons}>
+          <button 
+            class={styles.SaveButton}
+            onClick={saveQuestData}
+            disabled={questData.loading || !!questData.error || !nodes.length}
+            title="Сохранить изменения"
+          >
+            Сохранить
+          </button>
+          <button 
+            class={styles.DownloadButton}
+            onClick={downloadQuestData}
+            disabled={questData.loading || !!questData.error || !nodes.length}
+            title="Скачать квест в формате JSON"
+          >
+            Скачать
+          </button>
+        </div>
       </header>
       <div
         ref={(el) => { containerRef = el; }}
@@ -280,6 +375,12 @@ function Graph() {
           isVisible={!!selectedNode()}
           onClose={() => setSelectedNode(null)}
           setCurrentNode={(scene_id) => setSelectedNode(nodes.find(node => node.scene_id === scene_id) || null)}
+          setNode={selectedNode() ? 
+            (() => {
+              const index = nodes.findIndex(node => node.scene_id === selectedNode()?.scene_id);
+              return index >= 0 ? setNodes.bind(null, index) as SetStoreFunction<GraphNodeInterface> : undefined;
+            })() : undefined
+          }
         />
       </div>
     </>
