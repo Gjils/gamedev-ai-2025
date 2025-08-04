@@ -6,3 +6,4 @@ langchain-community>=0.3.27
 networkx>=3.5
 pygraphviz>=1.14  
 numpy>=2.3.2
+gigachat>=0.1.41.post1
