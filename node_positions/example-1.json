@@ -2,120 +2,120 @@
   {
     "scene_id": "start",
     "position": {
-      "x": 27,
-      "y": 178
+      "x": -369,
+      "y": 124
     }
   },
   {
     "scene_id": "main_gate",
     "position": {
-      "x": 141,
-      "y": 203
+      "x": -197,
+      "y": 161
     }
   },
   {
     "scene_id": "hidden_path",
     "position": {
-      "x": 289,
-      "y": 151
+      "x": 24,
+      "y": 83
     }
   },
   {
     "scene_id": "fight_guards",
     "position": {
-      "x": 289,
-      "y": 205
+      "x": 24,
+      "y": 164
     }
   },
   {
     "scene_id": "sleep_guards",
     "position": {
-      "x": 485,
-      "y": 278
+      "x": 319,
+      "y": 274
     }
   },
   {
     "scene_id": "underground_corridor",
     "position": {
-      "x": 485,
-      "y": 132
+      "x": 319,
+      "y": 55
     }
   },
   {
     "scene_id": "enhanced_staff",
     "position": {
-      "x": 858,
-      "y": 97
+      "x": 878,
+      "y": 3
     }
   },
   {
     "scene_id": "repair_room",
     "position": {
-      "x": 485,
-      "y": 224
+      "x": 319,
+      "y": 193
     }
   },
   {
     "scene_id": "throne_room",
     "position": {
-      "x": 685,
-      "y": 178
+      "x": 618,
+      "y": 124
     }
   },
   {
     "scene_id": "final_battle_win",
     "position": {
-      "x": 858,
-      "y": 189
+      "x": 878,
+      "y": 140
     }
   },
   {
     "scene_id": "final_battle_talk",
     "position": {
-      "x": 1041,
-      "y": 241
+      "x": 1153,
+      "y": 218
     }
   },
   {
     "scene_id": "dark_corridor",
     "position": {
-      "x": 1216,
-      "y": 245
+      "x": 1415,
+      "y": 224
     }
   },
   {
     "scene_id": "ally_help",
     "position": {
-      "x": 1364,
-      "y": 126
+      "x": 1636,
+      "y": 46
     }
   },
   {
     "scene_id": "steal_scrolls",
     "position": {
-      "x": 1503,
-      "y": 126
+      "x": 1845,
+      "y": 46
     }
   },
   {
     "scene_id": "spirit_battle",
     "position": {
-      "x": 1041,
-      "y": 95
+      "x": 1153,
+      "y": 0
     }
   },
   {
     "scene_id": "side_passage",
     "position": {
-      "x": 1041,
-      "y": 149
+      "x": 1153,
+      "y": 80
     }
   },
   {
     "scene_id": "gather_info",
     "position": {
-      "x": 1216,
-      "y": 191
+      "x": 1415,
+      "y": 143
     }
   }
 ]
