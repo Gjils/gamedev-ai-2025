@@ -1,7 +1,7 @@
 import { createSignal } from 'solid-js';
 
+import { A, useNavigate } from '@solidjs/router';
 import styles from './Generation.module.css';
-import { A } from '@solidjs/router';
 
 interface QuestFormData {
   quest_id: string;
@@ -11,6 +11,8 @@ interface QuestFormData {
 }
 
 function Generation() {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = createSignal<QuestFormData>({
     quest_id: '',
     genre: '',
@@ -42,12 +44,35 @@ function Generation() {
     setIsSubmitting(true);
     
     try {
-      // TODO: Здесь будет отправка данных на backend для генерации квеста
-      console.log('Данные квеста:', data);
-      alert('Квест отправлен на генерацию!');
+      // Формируем промпт из данных формы
+      const user_prompt = `Жанр: ${data.genre}\nГлавный герой: ${data.hero}\nЦель квеста: ${data.goal}`;
+      
+      // Отправляем запрос на backend
+      const response = await fetch('http://localhost:8000/generate_quest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          quest_name: data.quest_id,
+          user_prompt: user_prompt
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({ detail: 'Unknown error' }));
+        throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Квест успешно сгенерирован:', result);
+      
+      // Перенаправляем на страницу с квестом
+      navigate(`/${data.quest_id}`);
+      
     } catch (error) {
       console.error('Ошибка при отправке:', error);
-      alert('Произошла ошибка при отправке');
+      alert(`Произошла ошибка при генерации квеста: ${error instanceof Error ? error.message : 'Unknown error'}`);
     } finally {
       setIsSubmitting(false);
     }
