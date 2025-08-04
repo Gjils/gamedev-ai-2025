@@ -24,7 +24,7 @@ Launch your Terminal. There, navigate to the folder where the repository is loca
 
 1. After executing ``docker compose up --build`` open the website ``http://localhost:3000``.
 2. On this website, you need to enter the initial parameters of your RPG quest: Quest ID, genre, main character, purpose. 
-3. After that, a quest and a graph illustrating the plot forks will be generated. 
+3. After that, a quest and a graph illustrating the plot forks will be generated. **The files are responsible for the generation `generation.py` , `process.py` and `main.py`**.
 4. Clicking on the graph element opens a text describing the plot and a description of the plot choices leading to further forks.
 5. The quest will be saved as a JSON file (look at your folder with downloads).
 
