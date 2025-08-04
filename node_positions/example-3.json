@@ -2,106 +2,106 @@
   {
     "scene_id": "start",
     "position": {
-      "x": 27,
-      "y": 234
+      "x": -146,
+      "y": 324
     }
   },
   {
     "scene_id": "main_interface_attack",
     "position": {
-      "x": 187,
-      "y": 261
+      "x": 95,
+      "y": 364
     }
   },
   {
     "scene_id": "trojan_implant",
     "position": {
-      "x": 187,
-      "y": 153
+      "x": 95,
+      "y": 202
     }
   },
   {
     "scene_id": "retry_later",
     "position": {
-      "x": 398,
-      "y": 342
+      "x": 411,
+      "y": 486
     }
   },
   {
     "scene_id": "continue_attack",
     "position": {
-      "x": 398,
-      "y": 261
+      "x": 411,
+      "y": 364
     }
   },
   {
     "scene_id": "quick_download",
     "position": {
-      "x": 398,
-      "y": 153
+      "x": 411,
+      "y": 202
     }
   },
   {
     "scene_id": "stealth_mode",
     "position": {
-      "x": 398,
-      "y": 72
+      "x": 411,
+      "y": 81
     }
   },
   {
     "scene_id": "explain_to_client",
     "position": {
-      "x": 611,
-      "y": 396
+      "x": 730,
+      "y": 567
     }
   },
   {
     "scene_id": "try_again_immediately",
     "position": {
-      "x": 611,
-      "y": 342
+      "x": 730,
+      "y": 486
     }
   },
   {
     "scene_id": "erase_logs",
     "position": {
-      "x": 611,
-      "y": 288
+      "x": 730,
+      "y": 405
     }
   },
   {
     "scene_id": "block_server",
     "position": {
-      "x": 611,
-      "y": 234
+      "x": 730,
+      "y": 324
     }
   },
   {
     "scene_id": "immediate_exit",
     "position": {
-      "x": 611,
-      "y": 180
+      "x": 730,
+      "y": 243
     }
   },
   {
     "scene_id": "wait_for_completion",
     "position": {
-      "x": 611,
-      "y": 126
+      "x": 730,
+      "y": 162
     }
   },
   {
     "scene_id": "invisibility_access",
     "position": {
-      "x": 611,
-      "y": 72
+      "x": 730,
+      "y": 81
     }
   },
   {
     "scene_id": "distraction_maneuver",
     "position": {
-      "x": 611,
-      "y": 18
+      "x": 730,
+      "y": 0
     }
   }
 ]

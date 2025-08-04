@@ -7,7 +7,11 @@ body {
     'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1A3636;
+  background-color: var(--bg-color);
+  --bg-color: #F2D7D9;
+  --primary-color: #D3CEDF;
+  --secondary-color: #9CB4CC;
+  --text-color: #748DA6;
 }
 
 * {

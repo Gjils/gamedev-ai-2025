@@ -1,0 +1,144 @@
+.Header {
+    padding: 30px 20px 0px 20px;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color)
+}
+
+.BackButton {
+    background-color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: none;
+    color: var(--text-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-weight: bold;
+    border: 2px solid var(--text-color);
+    text-decoration: none;
+}
+
+.BackButton:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.GenerationContainer {
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.FormField {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.FormLabel {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+}
+
+.FormInput {
+    font-weight: bold;
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid var(--text-color);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+    display: block;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.FormInput::placeholder {
+    color: var(--text-color);
+}
+
+.FormInput:focus {
+    border-color: var(--text-color);
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+}
+.FormInput:focus::placeholder {
+    color: var(--bg-color);
+}
+
+.FormTextarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid var(--text-color);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.FormTextarea::placeholder {
+    color: var(--text-color);
+}
+
+.FormTextarea:focus {
+    border-color: var(--text-color);
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
+}
+.FormTextarea:focus::placeholder {
+    color: var(--bg-color);
+}
+
+.FormButton {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid var(--text-color);
+}
+
+.FormButton:disabled {
+    background-color: var(--primary-color);
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.FormButton:hover:not(:disabled) {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}

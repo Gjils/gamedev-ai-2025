@@ -38,10 +38,34 @@ def generate_node_positions(filename):
         pos = graphviz_layout(graph, prog='dot', args="-Grankdir=LR")
 
         coords = np.array(list(pos.values()))
+        
+        # Применяем скейлинг по Y для лучшего отображения
+        if len(coords) > 0:
+            # Получаем минимальные и максимальные значения
+            min_x, min_y = coords.min(axis=0)
+            max_x, max_y = coords.max(axis=0)
+            
+            # Вычисляем размах по каждой оси
+            range_x = max_x - min_x if max_x != min_x else 1
+            range_y = max_y - min_y if max_y != min_y else 1
+            
+            # Определяем коэффициент масштабирования для Y
+            # Увеличиваем расстояние между узлами по Y в 1.5 раза для лучшей читаемости
+            y_scale_factor = 1.5
+            x_scale_factor = 1.5
+
+            # Центрируем координаты относительно (0, 0) и применяем масштабирование
+            coords_centered = coords - [min_x + range_x/2, min_y + range_y/2]
+            coords_scaled = coords_centered * [x_scale_factor, y_scale_factor]
+
+            # Финальные координаты со сдвигом в положительную область
+            final_coords = coords_scaled + [range_x/2, range_y * y_scale_factor/2]
+        else:
+            final_coords = coords
 
         node_text = list(graph.nodes())
 
-        node_positions = [{ 'scene_id': node, 'position': {'x': int(coord[0]), 'y': int(coord[1])} } for node, coord in zip(node_text, coords)]
+        node_positions = [{ 'scene_id': node, 'position': {'x': int(coord[0]), 'y': int(coord[1])} } for node, coord in zip(node_text, final_coords)]
 
         with open(output_path, 'w') as f:
             json.dump(node_positions, f, indent=2)
