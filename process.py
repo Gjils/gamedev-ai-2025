@@ -15,6 +15,91 @@ class GameValidator:
         self.scenes = {}
         self.graph = {}
         
+    def validate_data(self, data: Dict) -> Tuple[bool, str]:
+        """
+        Поэтапно проверяет данные игровых сценариев.
+        
+        Args:
+            data: Словарь с данными игры
+            
+        Returns:
+            Tuple[bool, str]: (успех, сообщение)
+        """
+        # Проверяем базовую структуру
+        if not isinstance(data, dict) or 'scenes' not in data:
+            return False, "Данные не содержат поле 'scenes'"
+            
+        scenes = data['scenes']
+        if not isinstance(scenes, list):
+            return False, "Поле 'scenes' должно быть массивом"
+            
+        # Этап 2: Проверка количества сцен (минимум 5)
+        if len(scenes) < 5:
+            return False, f"Недостаточно сцен. Найдено {len(scenes)}, требуется минимум 5"
+            
+        # Строим граф сцен для дальнейшего анализа
+        self.scenes = {}
+        self.graph = {}
+        
+        for scene in scenes:
+            if not isinstance(scene, dict):
+                return False, "Сцена должна быть объектом"
+                
+            # Проверяем обязательные поля сцены
+            if 'scene_id' not in scene:
+                return False, "У сцены отсутствует поле 'scene_id'"
+                
+            if 'text' not in scene:
+                return False, f"У сцены '{scene.get('scene_id', 'unknown')}' отсутствует поле 'text'"
+                
+            if 'choices' not in scene:
+                return False, f"У сцены '{scene['scene_id']}' отсутствует поле 'choices'"
+                
+            choices = scene['choices']
+            if not isinstance(choices, list):
+                return False, f"У сцены '{scene['scene_id']}' поле 'choices' должно быть массивом"
+                
+            scene_id = scene['scene_id']
+            self.scenes[scene_id] = scene
+            self.graph[scene_id] = []
+            
+            # Проверяем обязательные поля каждого выбора
+            for i, choice in enumerate(choices):
+                if not isinstance(choice, dict):
+                    return False, f"У сцены '{scene_id}' выбор #{i+1} должен быть объектом"
+                    
+                if 'text' not in choice:
+                    return False, f"У сцены '{scene_id}' в выборе #{i+1} отсутствует поле 'text'"
+                    
+                if 'next_scene' not in choice:
+                    return False, f"У сцены '{scene_id}' в выборе #{i+1} отсутствует поле 'next_scene'"
+                    
+                self.graph[scene_id].append(choice['next_scene'])
+                    
+        # Этап 3: Проверка корректности ссылок (все next_scene должны существовать)
+        invalid_refs = self._check_scene_references()
+        if invalid_refs:
+            invalid_list = ', '.join([f"'{ref}'" for ref in invalid_refs[:5]])  # Показываем первые 5
+            more_text = f" и еще {len(invalid_refs) - 5}" if len(invalid_refs) > 5 else ""
+            return False, f"Найдены ссылки на несуществующие сцены: {invalid_list}{more_text}"
+            
+        # Этап 4: Проверка наличия развилки (хотя бы одна сцена с 2+ выборами)
+        has_branch = False
+        for scene_id, scene in self.scenes.items():
+            choices = scene.get('choices', [])
+            if len(choices) >= 2:
+                has_branch = True
+                break
+                
+        if not has_branch:
+            return False, "Не найдено ни одной развилки (сцены с 2+ выборами)"
+            
+        # Этап 5: Проверка глубины веток (минимум одна ветка глубиной 3+ сцены)
+        if not self._check_branch_depth():
+            return False, "Нет ветки глубиной минимум 3 сцены"
+            
+        return True, "Все проверки пройдены успешно"
+        
     def validate_file(self, filename: str) -> Tuple[bool, str, Optional[Dict]]:
         """
         Поэтапно проверяет файл с игровыми сценариями.
@@ -36,61 +121,13 @@ class GameValidator:
         except Exception as e:
             return False, f"Ошибка чтения файла: {e}", None
             
-        # Проверяем базовую структуру
-        if not isinstance(data, dict) or 'scenes' not in data:
-            return False, "JSON не содержит поле 'scenes'", None
-            
-        scenes = data['scenes']
-        if not isinstance(scenes, list):
-            return False, "Поле 'scenes' должно быть массивом", None
-            
-        # Этап 2: Проверка количества сцен (минимум 5)
-        if len(scenes) < 5:
-            return False, f"Недостаточно сцен. Найдено {len(scenes)}, требуется минимум 5", None
-            
-        # Строим граф сцен для дальнейшего анализа
-        self.scenes = {}
-        self.graph = {}
+        # Валидируем данные
+        success, message = self.validate_data(data)
         
-        for scene in scenes:
-            if not isinstance(scene, dict):
-                return False, "Сцена должна быть объектом", None
-                
-            if 'scene_id' not in scene:
-                return False, "У сцены отсутствует поле 'scene_id'", None
-                
-            scene_id = scene['scene_id']
-            self.scenes[scene_id] = scene
-            self.graph[scene_id] = []
-            
-            choices = scene.get('choices', [])
-            for choice in choices:
-                if isinstance(choice, dict) and 'next_scene' in choice:
-                    self.graph[scene_id].append(choice['next_scene'])
-                    
-        # Этап 3: Проверка корректности ссылок (все next_scene должны существовать)
-        invalid_refs = self._check_scene_references()
-        if invalid_refs:
-            invalid_list = ', '.join([f"'{ref}'" for ref in invalid_refs[:5]])  # Показываем первые 5
-            more_text = f" и еще {len(invalid_refs) - 5}" if len(invalid_refs) > 5 else ""
-            return False, f"Найдены ссылки на несуществующие сцены: {invalid_list}{more_text}", None
-            
-        # Этап 4: Проверка наличия развилки (хотя бы одна сцена с 2+ выборами)
-        has_branch = False
-        for scene_id, scene in self.scenes.items():
-            choices = scene.get('choices', [])
-            if len(choices) >= 2:
-                has_branch = True
-                break
-                
-        if not has_branch:
-            return False, "Не найдено ни одной развилки (сцены с 2+ выборами)", None
-            
-        # Этап 5: Проверка глубины веток (минимум одна ветка глубиной 3+ сцены)
-        if not self._check_branch_depth():
-            return False, "Нет ветки глубиной минимум 3 сцены", None
-            
-        return True, "Все проверки пройдены успешно", data
+        if success:
+            return True, message, data
+        else:
+            return False, message, None
         
     def _check_scene_references(self) -> List[str]:
         """
@@ -190,6 +227,37 @@ class GameValidator:
                         
         dfs(start, [], set())
         return all_paths
+
+
+def process_text_to_json(text_content: str) -> Optional[Dict]:
+    """
+    Обрабатывает текстовый контент и извлекает JSON.
+    
+    Args:
+        text_content: Текстовое содержимое файла
+        
+    Returns:
+        Optional[Dict]: Извлеченные JSON данные или None
+    """
+    try:
+        # Пытаемся парсить как чистый JSON
+        data = json.loads(text_content)
+        return data
+    except json.JSONDecodeError:
+        # Ищем JSON в тексте (между фигурными скобками)
+        start_idx = text_content.find('{')
+        end_idx = text_content.rfind('}')
+        
+        if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+            json_content = text_content[start_idx:end_idx+1]
+            try:
+                data = json.loads(json_content)
+                return data
+            except json.JSONDecodeError:
+                pass
+                
+        # Если не нашли валидный JSON
+        return None
 
 
 def main():

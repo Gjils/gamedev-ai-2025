@@ -1,0 +1,49 @@
+{
+  "scenes": [
+    {
+      "scene_id": "start",
+      "text": "Начало игры",
+      "choices": [
+        {
+          "text": "Идти дальше",
+          "next_scene": "scene1"
+        }
+      ]
+    },
+    {
+      "scene_id": "scene1",
+      "text": "Сцена 1",
+      "choices": [
+        {
+          "text": "Продолжить",
+          "next_scene": "scene2"
+        }
+      ]
+    },
+    {
+      "scene_id": "scene2",
+      "text": "Сцена 2", 
+      "choices": [
+        {
+          "text": "Идти дальше",
+          "next_scene": "scene3"
+        }
+      ]
+    },
+    {
+      "scene_id": "scene3",
+      "text": "Сцена 3",
+      "choices": [
+        {
+          "text": "Финиш",
+          "next_scene": "end"
+        }
+      ]
+    },
+    {
+      "scene_id": "end",
+      "text": "Конец игры",
+      "choices": []
+    }
+  ]
+}

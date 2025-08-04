@@ -1,0 +1,57 @@
+{
+  "scenes": [
+    {
+      "scene_id": "start",
+      "text": "Начало игры",
+      "choices": [
+        {
+          "text": "Идти налево",
+          "next_scene": "left"
+        },
+        {
+          "text": "Идти направо", 
+          "next_scene": "right"
+        }
+      ]
+    },
+    {
+      "scene_id": "left",
+      "text": "Вы пошли налево",
+      "choices": [
+        {
+          "text": "Продолжить",
+          "next_scene": "deep_left"
+        }
+      ]
+    },
+    {
+      "scene_id": "right",
+      "text": "Вы пошли направо",
+      "choices": [
+        {
+          "text": "Идти к несуществующей сцене",
+          "next_scene": "nonexistent_scene"
+        }
+      ]
+    },
+    {
+      "scene_id": "deep_left",
+      "text": "Глубоко слева",
+      "choices": [
+        {
+          "text": "Финиш",
+          "next_scene": "end"
+        },
+        {
+          "text": "Еще одна ошибочная ссылка",
+          "next_scene": "another_missing"
+        }
+      ]
+    },
+    {
+      "scene_id": "end",
+      "text": "Конец игры",
+      "choices": []
+    }
+  ]
+}
