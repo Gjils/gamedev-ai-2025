@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Папки для данных как volumes
+      - ./node_positions:/app/node_positions
+      - ./generated_quests:/app/generated_quests
+    environment:
+      - PYTHONPATH=/app
+      - GIGACHAT_CREDENTIALS=${GIGACHAT_CREDENTIALS}
+    networks:
+      - gamedev-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - gamedev-network
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+networks:
+  gamedev-network:
+    driver: bridge
+
+volumes:
+  node_positions:
+  generated_quests:

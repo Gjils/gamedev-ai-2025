@@ -1,0 +1,79 @@
+[
+  {
+    "scene_id": "start",
+    "position": {
+      "x": -143,
+      "y": 162
+    }
+  },
+  {
+    "scene_id": "use_spell",
+    "position": {
+      "x": 61,
+      "y": 202
+    }
+  },
+  {
+    "scene_id": "inspect_lock",
+    "position": {
+      "x": 61,
+      "y": 121
+    }
+  },
+  {
+    "scene_id": "try_another_spell",
+    "position": {
+      "x": 362,
+      "y": 283
+    }
+  },
+  {
+    "scene_id": "inspect_lock_again",
+    "position": {
+      "x": 362,
+      "y": 202
+    }
+  },
+  {
+    "scene_id": "light_spell",
+    "position": {
+      "x": 362,
+      "y": 121
+    }
+  },
+  {
+    "scene_id": "pull_lever",
+    "position": {
+      "x": 362,
+      "y": 40
+    }
+  },
+  {
+    "scene_id": "energy_beam",
+    "position": {
+      "x": 715,
+      "y": 262
+    }
+  },
+  {
+    "scene_id": "think_again",
+    "position": {
+      "x": 715,
+      "y": 181
+    }
+  },
+  {
+    "scene_id": "secret_passage",
+    "position": {
+      "x": 715,
+      "y": 81
+    }
+  },
+  {
+    "scene_id": "continue_main_gate",
+    "position": {
+      "x": 715,
+      "y": 0
+    }
+  }
+]

@@ -2,105 +2,49 @@
   {
     "scene_id": "start",
     "position": {
-      "x": -146,
-      "y": 324
+      "x": -82,
+      "y": 121
     }
   },
   {
-    "scene_id": "main_interface_attack",
+    "scene_id": "plan_attack",
     "position": {
-      "x": 95,
-      "y": 364
-    }
-  },
-  {
-    "scene_id": "trojan_implant",
-    "position": {
-      "x": 95,
-      "y": 202
-    }
-  },
-  {
-    "scene_id": "retry_later",
-    "position": {
-      "x": 411,
-      "y": 486
-    }
-  },
-  {
-    "scene_id": "continue_attack",
-    "position": {
-      "x": 411,
-      "y": 364
-    }
-  },
-  {
-    "scene_id": "quick_download",
-    "position": {
-      "x": 411,
-      "y": 202
-    }
-  },
-  {
-    "scene_id": "stealth_mode",
-    "position": {
-      "x": 411,
-      "y": 81
-    }
-  },
-  {
-    "scene_id": "explain_to_client",
-    "position": {
-      "x": 730,
-      "y": 567
-    }
-  },
-  {
-    "scene_id": "try_again_immediately",
-    "position": {
-      "x": 730,
-      "y": 486
-    }
-  },
-  {
-    "scene_id": "erase_logs",
-    "position": {
-      "x": 730,
-      "y": 405
-    }
-  },
-  {
-    "scene_id": "block_server",
-    "position": {
-      "x": 730,
-      "y": 324
-    }
-  },
-  {
-    "scene_id": "immediate_exit",
-    "position": {
-      "x": 730,
-      "y": 243
-    }
-  },
-  {
-    "scene_id": "wait_for_completion",
-    "position": {
-      "x": 730,
+      "x": 122,
       "y": 162
     }
   },
   {
-    "scene_id": "invisibility_access",
+    "scene_id": "use_inside_man",
     "position": {
-      "x": 730,
+      "x": 122,
       "y": 81
     }
   },
   {
-    "scene_id": "distraction_maneuver",
+    "scene_id": "main_server",
     "position": {
-      "x": 730,
+      "x": 414,
+      "y": 243
+    }
+  },
+  {
+    "scene_id": "secondary_systems",
+    "position": {
+      "x": 414,
+      "y": 162
+    }
+  },
+  {
+    "scene_id": "admin_password",
+    "position": {
+      "x": 414,
+      "y": 81
+    }
+  },
+  {
+    "scene_id": "backdoor",
+    "position": {
+      "x": 414,
       "y": 0
     }
   }

@@ -1,7 +1,6 @@
 import json
 import networkx as nx
 import numpy as np
-import plotly.graph_objects as go
 from networkx.drawing.nx_agraph import graphviz_layout
 import sys
 import os

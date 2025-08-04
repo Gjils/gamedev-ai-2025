@@ -1,247 +1,247 @@
 [
-    {
-        "scene_id": "start",
-        "position": {
-            "x": -273,
-            "y": 343
-        }
-    },
-    {
-        "scene_id": "social_media_message",
-        "position": {
-            "x": -93.7357859531773,
-            "y": 705.9414715719064
-        }
-    },
-    {
-        "scene_id": "personal_invitation",
-        "position": {
-            "x": -94.69017632241817,
-            "y": 114.16624685138541
-        }
-    },
-    {
-        "scene_id": "repeat_message",
-        "position": {
-            "x": 312,
-            "y": 586
-        }
-    },
-    {
-        "scene_id": "phone_call",
-        "position": {
-            "x": 439.0735785953177,
-            "y": 372.18729096989966
-        }
-    },
-    {
-        "scene_id": "wait_here",
-        "position": {
-            "x": 165.18561872909697,
-            "y": 355.7240802675585
-        }
-    },
-    {
-        "scene_id": "eavesdrop_on_friend",
-        "position": {
-            "x": 214.5752508361204,
-            "y": -52.862876254180605
-        }
-    },
-    {
-        "scene_id": "ask_details",
-        "position": {
-            "x": 657,
-            "y": 769
-        }
-    },
-    {
-        "scene_id": "give_up",
-        "position": {
-            "x": 657,
-            "y": 586
-        }
-    },
-    {
-        "scene_id": "quick_proposal",
-        "position": {
-            "x": 657,
-            "y": 486
-        }
-    },
-    {
-        "scene_id": "small_talk",
-        "position": {
-            "x": 657,
-            "y": 405
-        }
-    },
-    {
-        "scene_id": "happy_agreement",
-        "position": {
-            "x": 817.7274247491638,
-            "y": 294.86956521739137
-        }
-    },
-    {
-        "scene_id": "confused_by_behavior",
-        "position": {
-            "x": 657,
-            "y": 202
-        }
-    },
-    {
-        "scene_id": "return_and_wait",
-        "position": {
-            "x": 293.89799331103677,
-            "y": 106.29096989966558
-        }
-    },
-    {
-        "scene_id": "let_it_be",
-        "position": {
-            "x": 657,
-            "y": 0
-        }
-    },
-    {
-        "scene_id": "promise_fun_evening",
-        "position": {
-            "x": 1004,
-            "y": 891
-        }
-    },
-    {
-        "scene_id": "admit_fear",
-        "position": {
-            "x": 1004,
-            "y": 769
-        }
-    },
-    {
-        "scene_id": "planning_the_date",
-        "position": {
-            "x": 1004,
-            "y": 567
-        }
-    },
-    {
-        "scene_id": "friends_advice",
-        "position": {
-            "x": 1188.8979933110368,
-            "y": 441.54180602006693
-        }
-    },
-    {
-        "scene_id": "excited_agreement",
-        "position": {
-            "x": 1004,
-            "y": 405
-        }
-    },
-    {
-        "scene_id": "think_later",
-        "position": {
-            "x": 1004,
-            "y": 324
-        }
-    },
-    {
-        "scene_id": "laugh_and_reveal",
-        "position": {
-            "x": 1004,
-            "y": 243
-        }
-    },
-    {
-        "scene_id": "angry_accusations",
-        "position": {
-            "x": 1349.0401337792641,
-            "y": 122.75418060200673
-        }
-    },
-    {
-        "scene_id": "positive_planning",
-        "position": {
-            "x": 1004,
-            "y": 81
-        }
-    },
-    {
-        "scene_id": "worry_about_delay",
-        "position": {
-            "x": 1004,
-            "y": 0
-        }
-    },
-    {
-        "scene_id": "gift_preparation",
-        "position": {
-            "x": 1367,
-            "y": 972
-        }
-    },
-    {
-        "scene_id": "consult_with_friends",
-        "position": {
-            "x": 1367,
-            "y": 891
-        }
-    },
-    {
-        "scene_id": "gratitude_and_friendship",
-        "position": {
-            "x": 1367,
-            "y": 810
-        }
-    },
-    {
-        "scene_id": "back_to_normal_life",
-        "position": {
-            "x": 1367,
-            "y": 729
-        }
-    },
-    {
-        "scene_id": "amusement_park_visit",
-        "position": {
-            "x": 1367,
-            "y": 648
-        }
-    },
-    {
-        "scene_id": "cozy_restaurant",
-        "position": {
-            "x": 1367,
-            "y": 567
-        }
-    },
-    {
-        "scene_id": "best_date_ever",
-        "position": {
-            "x": 1367,
-            "y": 486
-        }
-    },
-    {
-        "scene_id": "unique_event",
-        "position": {
-            "x": 1367,
-            "y": 405
-        }
-    },
-    {
-        "scene_id": "prepare_morally",
-        "position": {
-            "x": 1367,
-            "y": 324
-        }
-    },
-    {
-        "scene_id": "forget_and_study",
-        "position": {
-            "x": 1367,
-            "y": 243
-        }
+  {
+    "scene_id": "start",
+    "position": {
+      "x": -306,
+      "y": 343
     }
+  },
+  {
+    "scene_id": "social_media_message",
+    "position": {
+      "x": -30,
+      "y": 465
+    }
+  },
+  {
+    "scene_id": "personal_invitation",
+    "position": {
+      "x": -30,
+      "y": 243
+    }
+  },
+  {
+    "scene_id": "repeat_message",
+    "position": {
+      "x": 354,
+      "y": 586
+    }
+  },
+  {
+    "scene_id": "phone_call",
+    "position": {
+      "x": 354,
+      "y": 465
+    }
+  },
+  {
+    "scene_id": "wait_here",
+    "position": {
+      "x": 354,
+      "y": 243
+    }
+  },
+  {
+    "scene_id": "eavesdrop_on_friend",
+    "position": {
+      "x": 354,
+      "y": 81
+    }
+  },
+  {
+    "scene_id": "ask_details",
+    "position": {
+      "x": 737,
+      "y": 769
+    }
+  },
+  {
+    "scene_id": "give_up",
+    "position": {
+      "x": 737,
+      "y": 586
+    }
+  },
+  {
+    "scene_id": "quick_proposal",
+    "position": {
+      "x": 737,
+      "y": 486
+    }
+  },
+  {
+    "scene_id": "small_talk",
+    "position": {
+      "x": 737,
+      "y": 405
+    }
+  },
+  {
+    "scene_id": "happy_agreement",
+    "position": {
+      "x": 737,
+      "y": 283
+    }
+  },
+  {
+    "scene_id": "confused_by_behavior",
+    "position": {
+      "x": 737,
+      "y": 202
+    }
+  },
+  {
+    "scene_id": "return_and_wait",
+    "position": {
+      "x": 737,
+      "y": 81
+    }
+  },
+  {
+    "scene_id": "let_it_be",
+    "position": {
+      "x": 737,
+      "y": 0
+    }
+  },
+  {
+    "scene_id": "promise_fun_evening",
+    "position": {
+      "x": 1122,
+      "y": 891
+    }
+  },
+  {
+    "scene_id": "admit_fear",
+    "position": {
+      "x": 1122,
+      "y": 769
+    }
+  },
+  {
+    "scene_id": "planning_the_date",
+    "position": {
+      "x": 1122,
+      "y": 567
+    }
+  },
+  {
+    "scene_id": "friends_advice",
+    "position": {
+      "x": 1122,
+      "y": 486
+    }
+  },
+  {
+    "scene_id": "excited_agreement",
+    "position": {
+      "x": 1122,
+      "y": 405
+    }
+  },
+  {
+    "scene_id": "think_later",
+    "position": {
+      "x": 1122,
+      "y": 324
+    }
+  },
+  {
+    "scene_id": "laugh_and_reveal",
+    "position": {
+      "x": 1122,
+      "y": 243
+    }
+  },
+  {
+    "scene_id": "angry_accusations",
+    "position": {
+      "x": 1122,
+      "y": 162
+    }
+  },
+  {
+    "scene_id": "positive_planning",
+    "position": {
+      "x": 1122,
+      "y": 81
+    }
+  },
+  {
+    "scene_id": "worry_about_delay",
+    "position": {
+      "x": 1122,
+      "y": 0
+    }
+  },
+  {
+    "scene_id": "gift_preparation",
+    "position": {
+      "x": 1530,
+      "y": 972
+    }
+  },
+  {
+    "scene_id": "consult_with_friends",
+    "position": {
+      "x": 1530,
+      "y": 891
+    }
+  },
+  {
+    "scene_id": "gratitude_and_friendship",
+    "position": {
+      "x": 1530,
+      "y": 810
+    }
+  },
+  {
+    "scene_id": "back_to_normal_life",
+    "position": {
+      "x": 1530,
+      "y": 729
+    }
+  },
+  {
+    "scene_id": "amusement_park_visit",
+    "position": {
+      "x": 1530,
+      "y": 648
+    }
+  },
+  {
+    "scene_id": "cozy_restaurant",
+    "position": {
+      "x": 1530,
+      "y": 567
+    }
+  },
+  {
+    "scene_id": "best_date_ever",
+    "position": {
+      "x": 1530,
+      "y": 486
+    }
+  },
+  {
+    "scene_id": "unique_event",
+    "position": {
+      "x": 1530,
+      "y": 405
+    }
+  },
+  {
+    "scene_id": "prepare_morally",
+    "position": {
+      "x": 1530,
+      "y": 324
+    }
+  },
+  {
+    "scene_id": "forget_and_study",
+    "position": {
+      "x": 1530,
+      "y": 243
+    }
+  }
 ]

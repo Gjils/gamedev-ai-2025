@@ -2,105 +2,105 @@
   {
     "scene_id": "start",
     "position": {
-      "x": -126,
+      "x": -140,
       "y": 324
     }
   },
   {
     "scene_id": "dark_kingdom",
     "position": {
-      "x": 70,
+      "x": 77,
       "y": 364
     }
   },
   {
     "scene_id": "ally_search",
     "position": {
-      "x": 70,
+      "x": 77,
       "y": 202
     }
   },
   {
     "scene_id": "sneak_in",
     "position": {
-      "x": 338,
+      "x": 374,
       "y": 486
     }
   },
   {
     "scene_id": "open_challenge",
     "position": {
-      "x": 338,
+      "x": 374,
       "y": 364
     }
   },
   {
     "scene_id": "tailes_castle",
     "position": {
-      "x": 338,
+      "x": 374,
       "y": 202
     }
   },
   {
     "scene_id": "knuckles_village",
     "position": {
-      "x": 338,
+      "x": 374,
       "y": 81
     }
   },
   {
     "scene_id": "search_key",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 567
     }
   },
   {
     "scene_id": "magic_barrier",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 486
     }
   },
   {
     "scene_id": "portal_use",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 405
     }
   },
   {
     "scene_id": "secret_passage",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 324
     }
   },
   {
     "scene_id": "teleport_device",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 243
     }
   },
   {
     "scene_id": "hidden_paths_map",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 162
     }
   },
   {
     "scene_id": "ancient_entry",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 81
     }
   },
   {
     "scene_id": "combat_training",
     "position": {
-      "x": 633,
+      "x": 703,
       "y": 0
     }
   }

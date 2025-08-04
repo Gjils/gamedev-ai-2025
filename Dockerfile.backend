@@ -1,0 +1,52 @@
+FROM python:3.12-slim
+
+# Устанавливаем системные зависимости для pygraphviz
+RUN apt-get update --fix-missing && \
+    (apt-get install -y \
+    graphviz \
+    graphviz-dev \
+    pkg-config \
+    gcc \
+    g++ \
+    libgraphviz-dev \
+    || apt-get install -y --fix-missing \
+    graphviz \
+    graphviz-dev \
+    pkg-config \
+    gcc \
+    g++ \
+    libgraphviz-dev) \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем requirements.txt
+COPY requirements-docker.txt requirements.txt
+
+# Устанавливаем зависимости
+ENV PYGRAPHVIZ_PKG_CONFIG_PATH=/usr/lib/pkgconfig/
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Копируем файлы проекта
+COPY main.py .
+COPY generate.py .
+COPY process.py .
+COPY get_node_positions.py .
+COPY system_prompt.txt .
+
+# Копируем backend файл
+COPY ui-backend/backend.py ./ui-backend/
+
+# Создаем папки для данных
+RUN mkdir -p node_positions generated_quests
+
+# Устанавливаем права доступа для папок данных
+RUN chmod 777 node_positions generated_quests
+
+# Открываем порт
+EXPOSE 8000
+
+# Запускаем backend
+CMD ["python", "ui-backend/backend.py"]
