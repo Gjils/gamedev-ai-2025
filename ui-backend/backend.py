@@ -6,9 +6,12 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from dotenv import load_dotenv
 
 # Добавляем корневую папку в sys.path для импорта модулей
 sys.path.insert(0, str(Path(__file__).parent.parent))
+
+load_dotenv()
 
 # Импортируем функцию из нашего main.py
 import importlib.util
@@ -164,7 +167,7 @@ async def generate_quest(request: GenerateQuestRequest):
             system_prompt = f.read()
         
         # Учетные данные для GigaChat (из main.py)
-        credentials = "NDE3MGE0OWItOTg2MS00ZDQ3LWJkMjktYzQ5YjNkMzkxMmQyOmVlN2NhNTk1LTYwZTEtNDA0YS1iZWM3LTQ3YmRkM2U5YTBiMQ=="
+        credentials = os.getenv("GIGACHAT_CREDENTIALS")
         
         # Создаём директорию для квестов если её нет
         GENERATED_QUESTS_DIR.mkdir(exist_ok=True)

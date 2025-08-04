@@ -10,8 +10,9 @@
 
 The quest has 5-10 scenes, there are plot branches, the depth of one branch (apart from the main one) is at least 3 scenes. 
 
+# How to Install and Run 
 
-
+# How to Use 
 
 # :dizzy: Authors
 * [Alexey Preobrzhenskiy](https://github.com/Gjils)
