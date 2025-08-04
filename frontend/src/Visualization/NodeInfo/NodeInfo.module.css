@@ -47,6 +47,11 @@
     transition: background-color 0.2s ease;
 }
 
+.CloseButton:hover {
+    color: var(--bg-color);
+    background-color: var(--text-color);
+}
+
 .Header {
     margin-bottom: 30px;
 }

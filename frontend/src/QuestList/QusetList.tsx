@@ -32,6 +32,10 @@ function QuestList() {
     const [questList] = createResource(fetchQuestList);
 
     return (
+        <>
+        <header class={styles.Header}>
+            <h1 class={styles.Heading}>Список квестов</h1>
+        </header>
         <div class={styles.QuestListContainer}>
             {questList.loading && (
                 <div class={styles.Loading}>
@@ -49,12 +53,6 @@ function QuestList() {
                 <For each={questList()}>
                     {(questName) => (
                         <A class={styles.QuestLink}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--secondary-color)';
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = 'var(--primary-color)';
-                        }}
                         href={questName}>
                             {questName}
                         </A>
@@ -72,6 +70,7 @@ function QuestList() {
                 Сгенерировать квест
             </A>
         </div>
+        </>
     );
 }
 

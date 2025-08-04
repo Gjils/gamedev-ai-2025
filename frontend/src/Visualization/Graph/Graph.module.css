@@ -5,8 +5,8 @@
   position: relative;
   background-image: 
     /* Основная сетка 10x10 */
-    linear-gradient(rgba(var(--text-color), 0.1), 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--text-color), 0.1), 1px, transparent 1px),
+    linear-gradient(rgba(var(--text-color), 0.9), 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--text-color), 0.9), 1px, transparent 1px),
     /* Точки на пересечениях сетки 40x40 */
     radial-gradient(circle at center, rgba(var(--text-color), 0.4), 1px, transparent 1px);
   background-size: 
@@ -17,6 +17,61 @@
     0 0,
     0 0,
     0 0;
+}
+
+.Header {
+    padding-top: 20px;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    z-index: 2;
+    position: fixed;
+    width: 100%;
+}
+
+.BackButton {
+    background-color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: none;
+    color: var(--text-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    font-weight: bold;
+    border: 2px solid var(--text-color);
+    text-decoration: none;
+}
+
+.BackButton:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.HeadingContainer {
+    width: 240px;
+    height: 50px;
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--bg-color);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 .Graph {

@@ -2,119 +2,119 @@
   {
     "scene_id": "start",
     "position": {
-      "x": 0,
+      "x": -369,
       "y": 124
     }
   },
   {
     "scene_id": "main_gate",
     "position": {
-      "x": 114,
+      "x": -197,
       "y": 161
     }
   },
   {
     "scene_id": "hidden_path",
     "position": {
-      "x": 262,
+      "x": 24,
       "y": 83
     }
   },
   {
     "scene_id": "fight_guards",
     "position": {
-      "x": 262,
+      "x": 24,
       "y": 164
     }
   },
   {
     "scene_id": "sleep_guards",
     "position": {
-      "x": 458,
+      "x": 319,
       "y": 274
     }
   },
   {
     "scene_id": "underground_corridor",
     "position": {
-      "x": 458,
+      "x": 319,
       "y": 55
     }
   },
   {
     "scene_id": "enhanced_staff",
     "position": {
-      "x": 831,
+      "x": 878,
       "y": 3
     }
   },
   {
     "scene_id": "repair_room",
     "position": {
-      "x": 458,
+      "x": 319,
       "y": 193
     }
   },
   {
     "scene_id": "throne_room",
     "position": {
-      "x": 658,
+      "x": 618,
       "y": 124
     }
   },
   {
     "scene_id": "final_battle_win",
     "position": {
-      "x": 831,
+      "x": 878,
       "y": 140
     }
   },
   {
     "scene_id": "final_battle_talk",
     "position": {
-      "x": 1014,
+      "x": 1153,
       "y": 218
     }
   },
   {
     "scene_id": "dark_corridor",
     "position": {
-      "x": 1189,
+      "x": 1415,
       "y": 224
     }
   },
   {
     "scene_id": "ally_help",
     "position": {
-      "x": 1337,
+      "x": 1636,
       "y": 46
     }
   },
   {
     "scene_id": "steal_scrolls",
     "position": {
-      "x": 1476,
+      "x": 1845,
       "y": 46
     }
   },
   {
     "scene_id": "spirit_battle",
     "position": {
-      "x": 1014,
+      "x": 1153,
       "y": 0
     }
   },
   {
     "scene_id": "side_passage",
     "position": {
-      "x": 1014,
+      "x": 1153,
       "y": 80
     }
   },
   {
     "scene_id": "gather_info",
     "position": {
-      "x": 1189,
+      "x": 1415,
       "y": 143
     }
   }

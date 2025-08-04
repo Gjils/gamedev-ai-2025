@@ -52,11 +52,12 @@ def generate_node_positions(filename):
             # Определяем коэффициент масштабирования для Y
             # Увеличиваем расстояние между узлами по Y в 1.5 раза для лучшей читаемости
             y_scale_factor = 1.5
+            x_scale_factor = 1.5
 
             # Центрируем координаты относительно (0, 0) и применяем масштабирование
             coords_centered = coords - [min_x + range_x/2, min_y + range_y/2]
-            coords_scaled = coords_centered * [1, y_scale_factor]
-            
+            coords_scaled = coords_centered * [x_scale_factor, y_scale_factor]
+
             # Финальные координаты со сдвигом в положительную область
             final_coords = coords_scaled + [range_x/2, range_y * y_scale_factor/2]
         else:

@@ -1,4 +1,4 @@
-import { useParams } from "@solidjs/router";
+import { A, useParams } from "@solidjs/router";
 import { createEffect, createMemo, createResource, createSignal, For, onMount } from "solid-js";
 import { createStore, SetStoreFunction } from "solid-js/store";
 
@@ -216,65 +216,73 @@ function Graph() {
   });
 
   return (
-    <div
-      ref={(el) => { containerRef = el; }}
-      class={styles.GraphContainer}
-    > 
-      {questData.loading && (
-        <div class={styles.Loading}>
-          Загрузка квеста {questName}...
+    <>
+      <header class={styles.Header}>
+        <A href="/" class={styles.BackButton}>Назад</A>
+        <div class={styles.HeadingContainer}>
+          <h1 class={styles.Heading}>{questName}</h1>
         </div>
-      )}
-      
-      {questData.error && (
-        <div class={styles.Error}>
-          Ошибка загрузки квеста: {questData.error.message}
-        </div>
-      )}
-      
-      {!questData.loading && !questData.error && (
-        <>
-          <div
-            style={{
-              transform: `translate(${transform().x}px, ${transform().y}px) scale(${transform().scale})`,
-            }}
-            class={styles.Graph}
-          >
-          
-          {/* Узлы графа */}
-          <For each={nodes}>
-            {(node, index) => (
-              <GraphNode 
-                node={node} 
-                setNode={setNodes.bind(null, index()) as SetStoreFunction<GraphNodeInterface>} 
-                scale={() => transform().scale}
-                transform={transform()}
-                onClick={() => handleNodeClick(node)}
-              />
-            )}
-          </For>
-          {/* Связь */}
-          <svg 
-            class={styles.EdgesContainer}
-          >
-            <For each={edges()}>
-              {(edge) => (
-                <GraphEdge {...edge} />
+      </header>
+      <div
+        ref={(el) => { containerRef = el; }}
+        class={styles.GraphContainer}
+      > 
+        {questData.loading && (
+          <div class={styles.Loading}>
+            Загрузка квеста {questName}...
+          </div>
+        )}
+        
+        {questData.error && (
+          <div class={styles.Error}>
+            Ошибка загрузки квеста: {questData.error.message}
+          </div>
+        )}
+        
+        {!questData.loading && !questData.error && (
+          <>
+            <div
+              style={{
+                transform: `translate(${transform().x}px, ${transform().y}px) scale(${transform().scale})`,
+              }}
+              class={styles.Graph}
+            >
+            
+            {/* Узлы графа */}
+            <For each={nodes}>
+              {(node, index) => (
+                <GraphNode 
+                  node={node} 
+                  setNode={setNodes.bind(null, index()) as SetStoreFunction<GraphNodeInterface>} 
+                  scale={() => transform().scale}
+                  transform={transform()}
+                  onClick={() => handleNodeClick(node)}
+                />
               )}
             </For>
-          </svg>
-        </div>
-        </>
-      )}
-      
-      {/* Отображение информации о выбранной сцене */}
-      <NodeInfo
-        node={selectedNode()}
-        isVisible={!!selectedNode()}
-        onClose={() => setSelectedNode(null)}
-        setCurrentNode={(scene_id) => setSelectedNode(nodes.find(node => node.scene_id === scene_id) || null)}
-      />
-    </div>
+            {/* Связь */}
+            <svg 
+              class={styles.EdgesContainer}
+            >
+              <For each={edges()}>
+                {(edge) => (
+                  <GraphEdge {...edge} />
+                )}
+              </For>
+            </svg>
+          </div>
+          </>
+        )}
+        
+        {/* Отображение информации о выбранной сцене */}
+        <NodeInfo
+          node={selectedNode()}
+          isVisible={!!selectedNode()}
+          onClose={() => setSelectedNode(null)}
+          setCurrentNode={(scene_id) => setSelectedNode(nodes.find(node => node.scene_id === scene_id) || null)}
+        />
+      </div>
+    </>
   );
 }
 

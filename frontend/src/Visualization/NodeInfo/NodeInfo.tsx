@@ -44,12 +44,6 @@ function NodeInfo(props: NodeInfoProps) {
           <button
             onClick={props.onClose}
             class={styles.CloseButton}
-            onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = 'var(--secondary-color)';
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLButtonElement).style.backgroundColor = 'transparent';
-            }}
           >
             ×
           </button>
