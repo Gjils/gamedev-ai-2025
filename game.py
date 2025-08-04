@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+# Интерактивное demo игры в консоли
+
 import json
 import sys
 import os
