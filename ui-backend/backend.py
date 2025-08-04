@@ -27,6 +27,12 @@ class GenerateQuestRequest(BaseModel):
     quest_name: str
     user_prompt: str
 
+# Модель для обновления квеста
+class UpdateQuestRequest(BaseModel):
+    quest_name: str
+    quest_data: dict
+    node_positions: list
+
 # Настройка CORS для работы с фронтендом
 app.add_middleware(
     CORSMiddleware,
@@ -211,6 +217,43 @@ async def generate_quest(request: GenerateQuestRequest):
         raise HTTPException(
             status_code=500,
             detail=f"Internal server error: {str(e)}"
+        )
+
+@app.put("/update_quest")
+async def update_quest(request: UpdateQuestRequest):
+    """
+    Обновляет данные квеста и позиции узлов.
+    Перезаписывает JSON файлы в соответствующих папках.
+    """
+    try:
+        # Создаём директории если их нет
+        GENERATED_QUESTS_DIR.mkdir(exist_ok=True)
+        NODE_POSITIONS_DIR.mkdir(exist_ok=True)
+        
+        # Сохраняем данные квеста
+        quest_file_path = GENERATED_QUESTS_DIR / f"{request.quest_name}.json"
+        with open(quest_file_path, "w", encoding="utf-8") as f:
+            json.dump(request.quest_data, f, ensure_ascii=False, indent=4)
+        
+        # Сохраняем позиции узлов
+        positions_file_path = NODE_POSITIONS_DIR / f"{request.quest_name}.json"
+        with open(positions_file_path, "w", encoding="utf-8") as f:
+            json.dump(request.node_positions, f, ensure_ascii=False, indent=4)
+        
+        print(f"Квест {request.quest_name} успешно обновлён")
+        
+        return {
+            "message": "Quest updated successfully",
+            "quest_name": request.quest_name,
+            "quest_file": str(quest_file_path),
+            "positions_file": str(positions_file_path)
+        }
+        
+    except Exception as e:
+        print(f"Ошибка при обновлении квеста: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to update quest: {str(e)}"
         )
 
 if __name__ == "__main__":

@@ -54,6 +54,60 @@
     color: var(--bg-color);
 }
 
+.DownloadButton {
+    background-color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.DownloadButton:hover:not(:disabled) {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.DownloadButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.ActionButtons {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.SaveButton {
+    background-color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 10px;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.SaveButton:hover:not(:disabled) {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+.SaveButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .HeadingContainer {
     width: fit-content;
     padding: 0 50px;
