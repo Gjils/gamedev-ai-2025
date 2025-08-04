@@ -5,8 +5,24 @@ import subprocess
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+# Добавляем корневую папку в sys.path для импорта модулей
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+# Импортируем функцию из нашего main.py
+import importlib.util
+spec = importlib.util.spec_from_file_location("main_module", Path(__file__).parent.parent / "main.py")
+main_module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(main_module)
+generate_quest_with_validation = main_module.generate_quest_with_validation
 
 app = FastAPI(title="Game Quest Backend", version="1.0.0")
+
+# Модель для запроса генерации квеста
+class GenerateQuestRequest(BaseModel):
+    quest_name: str
+    user_prompt: str
 
 # Настройка CORS для работы с фронтендом
 app.add_middleware(
@@ -121,6 +137,77 @@ async def list_quests():
         raise HTTPException(
             status_code=500, 
             detail=f"Error listing quests: {str(e)}"
+        )
+
+@app.post("/generate_quest")
+async def generate_quest(request: GenerateQuestRequest):
+    """
+    Генерирует новый квест на основе пользовательского промпта.
+    Сохраняет его в generated_quests и возвращает название файла.
+    """
+    try:
+        # Читаем системный промпт
+        system_prompt_path = PROJECT_ROOT / "system_prompt.txt"
+        if not system_prompt_path.exists():
+            raise HTTPException(
+                status_code=500,
+                detail="System prompt file not found"
+            )
+        
+        with open(system_prompt_path, "r", encoding="utf-8") as f:
+            system_prompt = f.read()
+        
+        # Учетные данные для GigaChat (из main.py)
+        credentials = "NDE3MGE0OWItOTg2MS00ZDQ3LWJkMjktYzQ5YjNkMzkxMmQyOmVlN2NhNTk1LTYwZTEtNDA0YS1iZWM3LTQ3YmRkM2U5YTBiMQ=="
+        
+        # Создаём директорию для квестов если её нет
+        GENERATED_QUESTS_DIR.mkdir(exist_ok=True)
+        
+        print(f"Начинаем генерацию квеста: {request.quest_name}")
+        
+        # Генерируем квест с валидацией
+        quest_data, errors = generate_quest_with_validation(
+            quest_name=request.quest_name,
+            user_prompt=request.user_prompt,
+            system_prompt=system_prompt,
+            credentials=credentials,
+            max_retries=3
+        )
+        
+        if errors and errors != "":
+            raise HTTPException(
+                status_code=400,
+                detail=f"Quest generation failed: {errors}"
+            )
+        
+        if quest_data is None:
+            raise HTTPException(
+                status_code=500,
+                detail="Quest generation failed: No data returned"
+            )
+        
+        # Сохраняем квест в файл
+        quest_file_path = GENERATED_QUESTS_DIR / f"{request.quest_name}.json"
+        with open(quest_file_path, "w", encoding="utf-8") as f:
+            json.dump(quest_data, f, ensure_ascii=False, indent=4)
+        
+        print(f"Квест {request.quest_name} успешно сохранён в {quest_file_path}")
+        
+        return {
+            "message": "Quest generated successfully",
+            "quest_name": request.quest_name,
+            "filename": f"{request.quest_name}.json",
+            "file_path": str(quest_file_path)
+        }
+        
+    except HTTPException:
+        # Перебрасываем HTTP исключения как есть
+        raise
+    except Exception as e:
+        print(f"Ошибка при генерации квеста: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"Internal server error: {str(e)}"
         )
 
 if __name__ == "__main__":
