@@ -10,9 +10,21 @@
 
 The quest has 5-10 scenes, there are plot branches, the depth of one branch (apart from the main one) is at least 3 scenes. 
 
-# How to Install and Run 
+# :paperclip: How to Install and Run 
 
-# How to Use 
+You can **download the service** using this [link](https://github.com/Gjils/gamedev-ai-2025). The link leads to the repository. To run the project locally, you need to clone the repository to yourself (via ``git clone [ssh\https]`` in your Terminal. Use the method that is more convenient for you).
+
+You need to run the service via Docker (make sure it is installed on your PC). After you have cloned the repository to yourself, you need to "build" the project. 
+
+Launch your Terminal. There, navigate to the folder where the repository is located. Run the `docker compose up --build` command. After that, you can launch the project via the Docker desktop application (or just go to ```http://localhost:3000``` , here is a website with _Quest Generator_).
+
+# :bulb: How to Use 
+
+1. After executing ``docker compose up --build`` open the website ``http://localhost:3000``.
+2. On this website, you need to enter the initial parameters of your RPG quest: Quest ID, genre, main character, purpose. 
+3. After that, a quest and a graph illustrating the plot forks will be generated. 
+4. Clicking on the graph element opens a text describing the plot and a description of the plot choices leading to further forks.
+5. The quest will be saved as a JSON file (look at your folder with downloads).
 
 # :dizzy: Authors
 * [Alexey Preobrzhenskiy](https://github.com/Gjils)
