@@ -14,6 +14,8 @@ The quest has 5-10 scenes, there are plot branches, the depth of one branch (apa
 
 You can **download the service** using this [link](https://github.com/Gjils/gamedev-ai-2025). The link leads to the repository. To run the project locally, you need to clone the repository to yourself (via ``git clone [ssh\https]`` in your Terminal. Use the method that is more convenient for you).
 
+After that, **please receive your authentication code from [GigaChat API](https://developers.sber.ru/portal/gigachat-and-api)**. This [video](https://youtu.be/HAg-GFKl1rc?si=8ycwwz9qZYffwIks) (video in Russian) contains simple instructions on how to get an authentication code. **Then create the .env file in the cloned repository and put your code there according to the template ``GIGACHAT_CREDENTIALS = "your authentication code from GigaChat API"``.**
+
 You need to run the service via Docker (make sure it is installed on your PC). After you have cloned the repository to yourself, you need to "build" the project. 
 
 Launch your Terminal. There, navigate to the folder where the repository is located. Run the `docker compose up --build` command. After that, you can launch the project via the Docker desktop application (or just go to ```http://localhost:3000``` , here is a website with _Quest Generator_).
